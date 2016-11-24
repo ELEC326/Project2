@@ -68,7 +68,7 @@ title('Joint CDF of X and Y')
 
 %  !! XY array holding all X and Y  !!
 
-for n=1:1:100
+for n=1:1:100000
     D(n)=randi(1000);
     if D(n)<500
         XY(1,n)=0;
