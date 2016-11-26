@@ -86,3 +86,61 @@ for n=1:1:100000
         end
     end
 end
+
+%III
+
+%Count occurences of each value and store in vector H
+
+H = zeros(2);
+
+for n = 1:1:100000
+    if XY(1,n)==0
+        if XY(2,n)==0
+            H(1,1) = H(1,1) + 1;
+        else
+            H(2,1) = H(2,1) + 1;
+        end
+    else
+        if XY(2,n)==0
+            H(1,2) = H(1,2) + 1;
+        else
+            H(2,2) = H(2,2) + 1;
+        end
+    end
+end
+
+H = H/100000
+
+figure
+stem3(x,y,H);
+xlabel('x')
+ylabel('y')
+zlabel('PMF')
+title('Calculated PMF of X and Y')
+
+%When the two PDF plots are compared, it is clear that they are essentially the same, with a difference of less than 0.01 for each probability. As the number of trials approaches infinty, the estimation will approach the theoretical values.
+
+%IV
+
+%Calculate the marginal pdf for x and y
+
+x_count = zeros(1,2);
+y_count = zeros(1,2);
+
+for n = 1:1:100000
+    if XY(1,n) == 0
+        x_count(1,1) = x_count(1,1) + 1;
+    else
+        x_count(1,2) = x_count(1,2) + 1;
+    end
+    if XY(2,n) == 0
+        y_count(1,1) = y_count(1,1) + 1;
+    else
+        y_count(1,2) = y_count(1,2) + 1;
+    end      
+end
+
+x_mpdf = x_count/100000
+y_mpdf = y_count/100000
+
+%Using the table provided, it can be determined that p_x(x) = [0.75, 0.25] for x = [0,1], and that p_y(y) = [0.375, 0.625] for y = [0, 1]. The estimated marginal pdfs are very close to the theoretical ones, with the probabilities differing by less than 0.01.  
