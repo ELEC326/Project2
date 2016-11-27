@@ -1,3 +1,6 @@
+% QUESTION 3
+
+% PART 1
 load('H.mat')
 
 total = 0;
@@ -11,16 +14,21 @@ for i = 20:70
     total = total +H (i,j) ;
     
   end
-end   
+end  
+% printing the PMF of rows 20 to 70 and all columns within
 fprintf('The total PMF between rows 20 and 70 is');
 total
 
+% PART 2
+
+%getting CPMF for all rows of column 40
 for i =1:101
     
     ytotal_40(i) = H(i,40);
     
 end
 
+%getting CPMF for all rows of column 10
 for i =1:101
     
     ytotal_10(i) = H(i,10);
