@@ -1,0 +1,50 @@
+%% Question 2 I
+
+RV1 = load('RV1.mat'); % LOAD RV1-RV3 from file
+RV1 = RV1.RV1;         % specify the variable in the MAT-file using dot notation,
+                       % making it able to access each item like elements in an array 
+RV2 = load('RV2.mat');
+RV2 = RV2.RV2;
+RV3 = load('RV3.mat');
+RV3 = RV3.RV3;
+
+JPMF1 = zeros(101, 101);    % Joint pmf of RV1, RV2. JPMF is set as a Matrix as an input for surf()
+JPMF2 = zeros(101, 101);    % Joint pmf of RV1, RV3
+
+for i = 1:1000000
+  JPMF1(RV1(i)+1, RV2(i)+1) = JPMF1(RV1(i)+1, RV2(i)+1)+1; %for each element both in RV1 and RV2/RV3, increase total
+  JPMF2(RV1(i)+1, RV3(i)+1) = JPMF2(RV1(i)+1, RV3(i)+1)+1;
+end  
+  
+for i = 1:101
+  for j = 1:101
+    JPMF1(i, j) = JPMF1(i, j) / 1000000; % divide by number of elements to determine joint PMF
+    JPMF2(i, j) = JPMF2(i, j) / 1000000;
+  end
+end  
+
+
+figure 
+surf(JPMF1)
+title('Joint PMF of RV1, RV2')
+xlabel('RV1')
+ylabel('RV2')
+zlabel('Joint PMF')
+
+figure
+surf(JPMF2)
+title('Joint PMF of RV1, RV3')
+xlabel('RV1')
+ylabel('RV3')
+zlabel('Joint PMF') 
+  
+%% Question 2 II  
+  
+%%Finding the correlation coefficient
+  
+fprintf('Correlation coefficient between RV1 and RV2:')
+corr(RV1, RV2)
+%%corrcoef(RV1,RV2)
+fprintf('Correlation coefficient between RV1 and RV3:')
+corr(RV1, RV3)
+%%corrcoef(RV1,RV3)
